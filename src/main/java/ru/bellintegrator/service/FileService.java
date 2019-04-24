@@ -24,7 +24,7 @@ public interface FileService {
      *
      * @param uploadFile файл
      */
-    boolean addFile(MultipartFile uploadFile) throws IOException;
+    void addFile(MultipartFile uploadFile) throws IOException;
 
     /**
      * Скачать файл

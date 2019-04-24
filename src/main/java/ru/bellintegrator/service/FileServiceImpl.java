@@ -47,29 +47,29 @@ public class FileServiceImpl implements FileService {
      * {@inheritDoc}
      */
     @Override
-    public boolean addFile(MultipartFile file) throws IOException {
-        if (file != null && (file.getOriginalFilename() != null) && (!file.getOriginalFilename().isEmpty())) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String fileName = file.getOriginalFilename();
-            String resultFilename = createUniqueFileName(fileName);
-
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-            UploadFile fileToRepo = new UploadFile();
-            fileToRepo.setFileName(resultFilename);
-            fileToRepo.setOriginalName(fileName);
-            fileToRepo.setDownloadCount(0);
-            fileRepo.save(fileToRepo);
-
-            return true;
+    public void addFile(MultipartFile file) {
+        if (file == null || (file.getOriginalFilename() == null) || (file.getOriginalFilename().isEmpty())) {
+            throw new RuntimeException("Error: File cant be empty!");
+        }
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
         }
 
-        return false;
+        String fileName = file.getOriginalFilename();
+        String resultFilename = createUniqueFileName(fileName);
+
+        try {
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+        } catch (IOException | IllegalStateException e) {
+            throw new RuntimeException("File or path was not found!", e);
+        }
+
+        UploadFile fileToRepo = new UploadFile();
+        fileToRepo.setFileName(resultFilename);
+        fileToRepo.setOriginalName(fileName);
+        fileToRepo.setDownloadCount(0);
+        fileRepo.save(fileToRepo);
     }
 
     /**
