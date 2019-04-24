@@ -41,7 +41,7 @@ public class FileController {
 
         model.put("files", files);
 
-        return "home";
+        return "files";
     }
 
     /**
@@ -73,11 +73,9 @@ public class FileController {
      * @param id уникальный идентификатор файла
      * @return страница со списком фалов
      */
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     public String deleteFile(@PathVariable(value = "id") String id) {
         fileService.deleteFile(id);
         return "redirect:/files";
     }
-
-
 }

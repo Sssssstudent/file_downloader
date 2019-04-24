@@ -105,9 +105,8 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public void deleteFile(String fileId) {
-        if (fileId == null || fileId.matches("[-+]?\\d+")) {
+        if (fileId == null || !fileId.matches("[-+]?\\d+")) {
             throw new RuntimeException("The file id is incorrect!");
-
         }
         Integer id = Integer.valueOf(fileId);
         try {
