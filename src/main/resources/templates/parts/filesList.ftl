@@ -24,5 +24,6 @@
         fetch('/files/' + id, {
             method: 'DELETE'
         });
+        location.reload();
     }
 </script>

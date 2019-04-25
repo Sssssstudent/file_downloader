@@ -22,14 +22,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("/files")
 public class FileController {
-    private final FileServiceImpl fileService;
-
     @Autowired
-    public FileController(FileServiceImpl fileService) {
-        this.fileService = fileService;
-    }
+    private FileServiceImpl fileService;
 
-    /**
+        /**
      * Отобразить все загруженные файлы
      *
      * @param model модель

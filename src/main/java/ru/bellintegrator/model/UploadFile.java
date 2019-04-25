@@ -43,8 +43,8 @@ public class UploadFile {
     public UploadFile() {
     }
 
-    public UploadFile(Integer version, String fileName, String originalName, Integer downloadCount) {
-        this.version = version;
+    public UploadFile(Integer id, String fileName, String originalName, Integer downloadCount) {
+        this.id = id;
         this.fileName = fileName;
         this.originalName = originalName;
         this.downloadCount = downloadCount;
